@@ -30,15 +30,9 @@
     }
 
     h1 {
-      margin: 0 0 12px;
+      margin: 0 0 18px;
       font-size: 28px;
       font-weight: 700;
-    }
-
-    .label {
-      font-size: 16px;
-      color: #666;
-      margin-bottom: 12px;
     }
 
     .next-box {
@@ -70,6 +64,12 @@
     .editor {
       display: none;
       margin-top: 18px;
+    }
+
+    .editor-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
     }
 
     textarea {
@@ -129,14 +129,15 @@
   <div class="wrap">
     <div class="card">
       <h1>さっきの続き</h1>
-      
 
-      <div id="nextBox" class="next-box"></div>
-
-      <button id="editBtn" class="btn btn-edit">編集する</button>
+      <div id="viewArea">
+        <div id="nextBox" class="next-box"></div>
+        <button id="editBtn" class="btn btn-edit">編集する</button>
+      </div>
 
       <div id="editor" class="editor">
-        <textarea id="inputBox" placeholder="次にやることを1つだけ書く"></textarea>
+        <div class="editor-title">編集画面</div>
+        <textarea id="inputBox" placeholder="ここに書く"></textarea>
         <div class="row">
           <button id="saveBtn" class="btn btn-save half">保存する</button>
           <button id="cancelBtn" class="btn btn-cancel half">戻る</button>
@@ -148,6 +149,7 @@
   <script>
     const STORAGE_KEY = "next_step_text";
 
+    const viewArea = document.getElementById("viewArea");
     const nextBox = document.getElementById("nextBox");
     const editBtn = document.getElementById("editBtn");
     const editor = document.getElementById("editor");
@@ -156,25 +158,21 @@
     const cancelBtn = document.getElementById("cancelBtn");
 
     function loadText() {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved && saved.trim() !== "") {
-        nextBox.textContent = saved;
-      } else {
-        nextBox.textContent = "次にやることを、ここに1つだけ残しておく。";
-      }
+      const saved = localStorage.getItem(STORAGE_KEY) || "";
+      nextBox.textContent = saved;
     }
 
     function openEditor() {
       const current = localStorage.getItem(STORAGE_KEY) || "";
       inputBox.value = current;
+      viewArea.style.display = "none";
       editor.style.display = "block";
-      editBtn.style.display = "none";
       inputBox.focus();
     }
 
     function closeEditor() {
       editor.style.display = "none";
-      editBtn.style.display = "block";
+      viewArea.style.display = "block";
     }
 
     saveBtn.addEventListener("click", () => {
