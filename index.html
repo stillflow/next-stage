@@ -129,14 +129,14 @@
   <div class="wrap">
     <div class="card">
       <h1>さっきの続き</h1>
-      <div class="label">次の一歩</div>
+      
 
       <div id="nextBox" class="next-box"></div>
 
       <button id="editBtn" class="btn btn-edit">編集する</button>
 
       <div id="editor" class="editor">
-        <textarea id="inputBox" placeholder="次の一歩を1つだけ書く"></textarea>
+        <textarea id="inputBox" placeholder="次にやることを1つだけ書く"></textarea>
         <div class="row">
           <button id="saveBtn" class="btn btn-save half">保存する</button>
           <button id="cancelBtn" class="btn btn-cancel half">戻る</button>
@@ -160,7 +160,7 @@
       if (saved && saved.trim() !== "") {
         nextBox.textContent = saved;
       } else {
-        nextBox.textContent = "次の一歩を、ここに1つだけ残しておく。";
+        nextBox.textContent = "次にやることを、ここに1つだけ残しておく。";
       }
     }
 
